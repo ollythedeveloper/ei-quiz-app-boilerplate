@@ -5,30 +5,95 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      image: <img src="images/capheus.jpg"></img>,
+      question: 'Where does Capheus "Van Damn" Onyango live?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'Nairobi, Kenya',
+        'New York, New York',
+        'Lagos, Nigeria',
+        'Detroit Michigan'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'Nairobi, Kenya'
     },
     {
-      question: 'What is the current year?',
+      image: URL(images/capheus.jpg),
+      question: 'Sun Bak goes to prison to protect her ______?',
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'mother',
+        'father',
+        'brother',
+        'boyfriend'
       ],
-      correctAnswer: '2019'
-    }
+      correctAnswer: 'brother'
+    },
+    {
+      image: images/capheus.jpg,
+      question: 'Who does Wolfgang Bogdanow fall in love with?',
+      answers: [
+        'Sun Bak',
+        'Nomi Marks',
+        'Will Gorski',
+        'Kala Dandekar'
+      ],
+      correctAnswer: 'Kala Dandekar'
+    },
+    {
+      question: "What is Kala Dandekar's profession?",
+      answers: [
+        'teacher',
+        'pharmacist',
+        'chemist',
+        'chef'
+      ],
+      correctAnswer: 'pharmacist'
+    },
+    {
+      question: 'What is Lito Rodriguez hiding from his fans/the public?',
+      answers: [
+        'a criminal past',
+        'his sexual orientation',
+        'a secret family',
+        'his hobbies'
+      ],
+      correctAnswer: 'his sexual orientation'
+    },
+    {
+      question: "Which of her family members does Nomi Marks have the most conflict with?",
+      answers: [
+        'her mother',
+        'her sister',
+        'her father',
+        'her cousin'
+      ],
+      correctAnswer: 'her mother'
+    },
+    {
+      question: "Who does Will Gorski have the deepest connection with in his clusters?",
+      answers: [
+        'Lito Rodriguez',
+        'Kala Dandekar',
+        'Riley Gunnarsdotir',
+        'Wolfgang Bogdanow'
+      ],
+      correctAnswer: 'Riley Gunnarsdotir'
+    },
+    {
+      question: "Where is Riley Gunnarsdotir from?",
+      answers: [
+        'London',
+        'Iceland',
+        'Chicago',
+        'San Fransico'
+      ],
+      correctAnswer: 'Iceland'
+    },
   ],
   quizStarted: false,
   questionNumber: 0,
   score: 0
 };
+
+console.log("word");
 
 /**
  * 
