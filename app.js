@@ -126,20 +126,65 @@ var startPage = `
 <button class="push-start"><span class="button-label">Start Quiz</span>
 </button></div></div>
 `
+var questarray= store.questions
+
+var firstQuest= questarray[0]
+
+var questionPage = `
+<img src=${firstQuest.image}><div class="group">
+ <div class="item"> <p>Question * of 8</p>
+ </div>
+ <div class="item"><p>Score: *</p>
+ </div>
+ </div>
+ <div class="container">
+ <form id="js-questions">
+ <h3>${firstQuest.question}</h3>
+ <input type="radio" name="option" value="ansOpt">
+ <label for="ansOpt">${firstQuest.answers[0]}</label></br>
+ <input type="radio" name="option" value="ansOpt">
+ <label for="ansOpt">${firstQuest.answers[1]}</label></br>
+ <input type="radio" name="option" value="ansOpt">
+ <label for="ansOpt">${firstQuest.answers[2]}</label></br>
+ <input type="radio" name="option" value="ansOpt">
+ <label for="ansOpt">${firstQuest.answers[3]}</label></br>
+ <button type="submit">Submit</button>
+ </form></div>
+`
+
+/********** RENDER FUNCTION(S) **********/
+
+// This function conditionally replaces the contents of the <main> tag based on the state of the store
+//This function adds the startPage template to the DOM
 function renderStartPage(){
   console.log('`renderStartPage` ran')
   $("main").append(startPage);
 }
-/********** RENDER FUNCTION(S) **********/
 
-// This function conditionally replaces the contents of the <main> tag based on the state of the store
+//This function clears the noBorder div(emptys the page for the next template)
+function clearPage(){
+  console.log('`clearPage` ran')
+  $(".noBorder").empty();
+}
 
+function generateQuestionPage(){
+  console.log('generating question')
+  $('.noBorder').append(questionPage)
+}
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+function handleStartQuiz(){
+  $('.container').on('click', '.push-start', event =>{
+    console.log('`handleStartQuiz` ran')
+    clearPage();
+    generateQuestionPage();
+  })
+}
 function handleQuizApp(){
   renderStartPage();
-  //handleStartQuiz();
+  handleStartQuiz();
+  //handleSubmitAnswer();
   //handleNextQuestion();
   //handleRestartQuiz();
 }
