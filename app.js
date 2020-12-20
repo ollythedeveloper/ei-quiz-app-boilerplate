@@ -98,7 +98,9 @@ const store = {
   score: 0
 };
 
-
+let questCount = 0;
+let questNumber = questCount+1;
+let quizScore = 0;
 /**
  * 
  * Technical requirements:
@@ -126,30 +128,53 @@ var startPage = `
 <button class="push-start"><span class="button-label">Start Quiz</span>
 </button></div></div>
 `
-var questarray= store.questions
+let questarray= store.questions
 
-var firstQuest= questarray[0]
+let currentQuest= questarray[questCount]
 
 var questionPage = `
-<img src=${firstQuest.image}><div class="group">
- <div class="item"> <p>Question * of 8</p>
+<img src=${currentQuest.image}><div class="group">
+ <div class="item"> <p>Question ${questNumber} of 8</p>
  </div>
- <div class="item"><p>Score: *</p>
+ <div class="item"><p>Score: ${quizScore}</p>
  </div>
  </div>
  <div class="container">
- <form id="js-questions">
- <h3>${firstQuest.question}</h3>
- <input type="radio" name="option" value="ansOpt">
- <label for="ansOpt">${firstQuest.answers[0]}</label></br>
- <input type="radio" name="option" value="ansOpt">
- <label for="ansOpt">${firstQuest.answers[1]}</label></br>
- <input type="radio" name="option" value="ansOpt">
- <label for="ansOpt">${firstQuest.answers[2]}</label></br>
- <input type="radio" name="option" value="ansOpt">
- <label for="ansOpt">${firstQuest.answers[3]}</label></br>
- <button type="submit">Submit</button>
+ <form id="js-questions-form">
+ <h3>${currentQuest.question}</h3>
+ <input type="radio" name="option" value="${currentQuest.answers[0]}">
+ <label for="ansOpt">${currentQuest.answers[0]}</label></br>
+ <input type="radio" name="option" value="${currentQuest.answers[1]}">
+ <label for="ansOpt">${currentQuest.answers[1]}</label></br>
+ <input type="radio" name="option" value="${currentQuest.answers[2]}">
+ <label for="ansOpt">${currentQuest.answers[2]}</label></br>
+ <input type="radio" name="option" value="${currentQuest.answers[3]}">
+ <label for="ansOpt">${currentQuest.answers[3]}</label></br>
+ <button class="enter-answer"><span class="button-label">Submit</span></button>
  </form></div>
+`
+var correctAnswerPage =`
+   <div class="noBorder">
+   <div class="group">
+   <div class="item"><p>Question ${questNumber} of 8</p> </div>
+   <div class="item"><p>Score: ${quizScore}</p>
+   </div></div>
+   <div class="container">
+   <h2>That is correct!</h2>
+   <button class="next-question"><span class="button-label">Next</span></button>
+   </div></div>
+`
+var incorrectAnswerPage =`
+   <div class="noBorder">
+   <div class="group">
+   <div class="item"><p>Question ${questNumber} of 8</p> </div>
+   <div class="item"><p>Score: ${quizScore}</p>
+   </div></div>
+   <div class="container">
+   <h3>That is incorrect.</h3>
+   <h4>The correct answer is: ${currentQuest.correctAnswer}</h4>
+   <button class="next-question"><span class="button-label">Next</span></button>
+   </div></div>
 `
 
 /********** RENDER FUNCTION(S) **********/
@@ -171,16 +196,49 @@ function generateQuestionPage(){
   console.log('generating question')
   $('.noBorder').append(questionPage)
 }
+
+function renderCorrectAnswerPage(){
+  console.log('correct answer submitted')
+  clearPage();
+  $(".noBorder").append(correctAnswerPage)
+}
+
+function renderIncorrectAnswerPage(){
+  console.log('incorrect answer submitted')
+  clearPage();
+  $(".noBorder").append(incorrectAnswerPage)
+}
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
 function handleStartQuiz(){
-  $('.container').on('click', '.push-start', event =>{
+  $('.container').on('click', `.push-start`, event =>{
     console.log('`handleStartQuiz` ran')
     clearPage();
     generateQuestionPage();
+    handleSubmitAnswer();
   })
 }
+
+function checkAnswer(ansOpt){
+  if (currentQuest.correctAnswer == ansOpt){
+    quizScore++;
+    renderCorrectAnswerPage();
+  }else{
+    renderIncorrectAnswerPage();
+  }
+}
+
+function handleSubmitAnswer(){
+  $('#js-questions-form').on('click', `.enter-answer`, event => {
+    event.preventDefault();
+    console.log('`hanldeSubmitAnswer` ran');
+    let ansOpt= $("input:checked").val();
+    console.log('User chose: '+ansOpt)
+    checkAnswer(ansOpt);
+  })
+}
+
 function handleQuizApp(){
   renderStartPage();
   handleStartQuiz();
