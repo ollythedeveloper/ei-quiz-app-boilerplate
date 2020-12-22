@@ -6,21 +6,63 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+@font-face{font-family: 'Rough Typewriter'; src:url(rough_typewriter.otf);}
+body{
+  background-color: #88BDBC;
+  margin: auto;
+  max-width: 700px;
+  padding: 15px;
+}
+h1{
+  color: #fff;
+  font-family: 'Rough Typewriter';
+}
+
+h2, h3, h4, p, .button-label{
+  color: #112D32;
+  font-family: 'Rough Typewriter';
+}
 img {
-  height: 350px;
+  border: 4px solid #254E58;
 }
 
 button:hover{
   cursor: pointer;
 }
 
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  margin: 10px;
+}
+
 .container {
   max-width: 500px;
-  border: 2px solid #000;
+  border: 3px solid #254E58;
   padding: 10px;
+}
+
+.noBorder{
+  width: 70%;
+  margin: auto;
+}
+
+.noBorder img{
+  width:100%;
 }
 
 button {
   padding: 3px;
   margin: 8px 0 0 0;
+}
+
+@media all and (min-width:800px){
+  .group{
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
