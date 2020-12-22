@@ -243,11 +243,6 @@ function checkAnswer(ansOpt){
     console.log('incorrect')
     renderIncorrectAnswerPage();
   }
-  if (store.questionNumber<7){
-
-  }else{
-    renderFinalPage();
-  }
 }
 
 function handleSubmitAnswer(){
@@ -262,7 +257,11 @@ function handleNextQuestion(){
   $('body').on('click', `.next-question`, event =>{
     event.preventDefault();
     store.questionNumber++;
+    if (store.questionNumber < store.questions.length){
     generateQuestionPage();
+    }else{
+      renderFinalPage();
+    }
   })
 }
 
