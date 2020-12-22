@@ -98,9 +98,7 @@ const store = {
   score: 0
 };
 
-let questCount = 0;
-let questNumber = questCount+1;
-let quizScore = 0;
+
 /**
  * 
  * Technical requirements:
@@ -128,54 +126,69 @@ var startPage = `
 <button class="push-start"><span class="button-label">Start Quiz</span>
 </button></div></div>
 `
-let questarray= store.questions
 
-let currentQuest= questarray[questCount]
-
-var questionPage = `
-<img src=${currentQuest.image}><div class="group">
- <div class="item"> <p>Question ${questNumber} of 8</p>
+function questionPage(){
+  return  `
+<img src=${store.questions[store.questionNumber].image}><div class="group">
+ <div class="item"> <p>Question ${store.questionNumber + 1} of 8</p>
  </div>
- <div class="item"><p>Score: ${quizScore}</p>
+ <div class="item"><p>Score: ${store.score}</p>
  </div>
  </div>
  <div class="container">
  <form id="js-questions-form">
- <h3>${currentQuest.question}</h3>
- <input type="radio" name="option" value="${currentQuest.answers[0]}">
- <label for="ansOpt">${currentQuest.answers[0]}</label></br>
- <input type="radio" name="option" value="${currentQuest.answers[1]}">
- <label for="ansOpt">${currentQuest.answers[1]}</label></br>
- <input type="radio" name="option" value="${currentQuest.answers[2]}">
- <label for="ansOpt">${currentQuest.answers[2]}</label></br>
- <input type="radio" name="option" value="${currentQuest.answers[3]}">
- <label for="ansOpt">${currentQuest.answers[3]}</label></br>
+ <h3>${store.questions[store.questionNumber].question}</h3>
+ <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[0]}">
+ <label for="ansOpt">${store.questions[store.questionNumber].answers[0]}</label></br>
+ <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[1]}">
+ <label for="ansOpt">${store.questions[store.questionNumber].answers[1]}</label></br>
+ <input type="radio" name="option" value="${cstore.questions[store.questionNumber].answers[2]}">
+ <label for="ansOpt">${store.questions[store.questionNumber].answers[2]}</label></br>
+ <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[3]}">
+ <label for="ansOpt">${store.questions[store.questionNumber].answers[3]}</label></br>
  <button class="enter-answer"><span class="button-label">Submit</span></button>
  </form></div>
 `
-var correctAnswerPage =`
+}
+
+function correctAnswerPage(){ 
+  return `
    <div class="noBorder">
    <div class="group">
-   <div class="item"><p>Question ${questNumber} of 8</p> </div>
-   <div class="item"><p>Score: ${quizScore}</p>
+   <div class="item"><p>Question ${store.questionNumber + 1} of 8</p> </div>
+   <div class="item"><p>Score: ${store.score}</p>
    </div></div>
    <div class="container">
    <h2>That is correct!</h2>
    <button class="next-question"><span class="button-label">Next</span></button>
    </div></div>
 `
-var incorrectAnswerPage =`
+}
+
+function incorrectAnswerPage(){ 
+  return `
    <div class="noBorder">
    <div class="group">
-   <div class="item"><p>Question ${questNumber} of 8</p> </div>
-   <div class="item"><p>Score: ${quizScore}</p>
+   <div class="item"><p>Question ${store.questionNumber + 1} of 8</p> </div>
+   <div class="item"><p>Score: ${store.score}</p>
    </div></div>
    <div class="container">
    <h3>That is incorrect.</h3>
-   <h4>The correct answer is: ${currentQuest.correctAnswer}</h4>
+   <h4>The correct answer is: ${store.questions[store.questionNumber].correctAnswer}</h4>
    <button class="next-question"><span class="button-label">Next</span></button>
    </div></div>
 `
+}
+
+function finalPage(){
+  return `
+  <div class="noBorder">
+  <div class="container">
+  <h2>You scored: ${store.score}/8<h2>
+  <button class="reset-quiz">Restart Quiz</button>
+  </div></div>
+  `
+}
 
 /********** RENDER FUNCTION(S) **********/
 
@@ -193,44 +206,58 @@ function clearPage(){
 }
 
 function generateQuestionPage(){
+  clearPage();
   console.log('generating question')
-  $('.noBorder').append(questionPage)
+  $('.noBorder').append(questionPage())
 }
 
 function renderCorrectAnswerPage(){
   console.log('correct answer submitted')
   clearPage();
-  $(".noBorder").append(correctAnswerPage)
+  $(".noBorder").append(correctAnswerPage())
 }
 
 function renderIncorrectAnswerPage(){
   console.log('incorrect answer submitted')
   clearPage();
-  $(".noBorder").append(incorrectAnswerPage)
+  $(".noBorder").append(incorrectAnswerPage())
 }
+
+function renderFinalPage(){
+  clearPage();
+  $(".noBorder").append(finalPage());
+}
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
 function handleStartQuiz(){
   $('.container').on('click', `.push-start`, event =>{
     console.log('`handleStartQuiz` ran')
     clearPage();
     generateQuestionPage();
-    handleSubmitAnswer();
   })
 }
 
 function checkAnswer(ansOpt){
-  if (currentQuest.correctAnswer == ansOpt){
-    quizScore++;
+  if (store.questions[store.questionNumber].correctAnswer === ansOpt){
+    store.score++;
+    console.log('correct answer given')
     renderCorrectAnswerPage();
   }else{
+    console.log('incorrect answe given')
     renderIncorrectAnswerPage();
+  }
+  if (store.questionNumber<7){
+
+  }else{
+    renderFinalPage();
   }
 }
 
 function handleSubmitAnswer(){
-  $('#js-questions-form').on('click', `.enter-answer`, event => {
+  $('body').on('click', `.next-question`, event => {
     event.preventDefault();
     console.log('`hanldeSubmitAnswer` ran');
     let ansOpt= $("input:checked").val();
@@ -239,12 +266,29 @@ function handleSubmitAnswer(){
   })
 }
 
+function handleNextQuestion(){
+  $('body').on('click', `.next-question`, event =>{
+    event.preventDefault();
+    console.log('`handelNextQuestion` ran')
+    store.questionNumber++;
+    console.log(store.questionNumber);
+    generateQuestionPage();
+  })
+}
+
+function handleRestartQuiz(){
+  $('body').on('click', `.reset-quiz`, event=>{
+    store.questionNumber=0
+    location.reload();
+  })
+}
+
 function handleQuizApp(){
   renderStartPage();
   handleStartQuiz();
-  //handleSubmitAnswer();
-  //handleNextQuestion();
-  //handleRestartQuiz();
+  handleNextQuestion();
+  handleSubmitAnswer();
+  handleRestartQuiz();
 }
 
 $(handleQuizApp)
