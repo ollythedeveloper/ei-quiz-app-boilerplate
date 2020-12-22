@@ -72,7 +72,7 @@ const store = {
     },
     {
       image: "images/will.jpg",
-      question: "Who does Will Gorski have the deepest connection with in his clusters?",
+      question: "Who does Will Gorski have the deepest connection with in his cluster?",
       answers: [
         'Lito Rodriguez',
         'Kala Dandekar',
@@ -122,7 +122,7 @@ var startPage = `
 <div class="noBorder">
 <img src="images/Sense8.jpg">
 <div class="container">
-<h2>See how well you know the characters from Sense8.<h2>
+<h2>See how well you know the characters from sense8.<h2>
 <button class="push-start"><span class="button-label">Start Quiz</span>
 </button></div></div>
 `
