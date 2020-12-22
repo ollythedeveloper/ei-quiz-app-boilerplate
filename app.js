@@ -129,7 +129,8 @@ var startPage = `
 
 function questionPage(){
   return  `
-<img src=${store.questions[store.questionNumber].image}><div class="group">
+ <div class="noBorder">
+ <img src=${store.questions[store.questionNumber].image}><div class="group">
  <div class="item"> <p>Question ${store.questionNumber + 1} of 8</p>
  </div>
  <div class="item"><p>Score: ${store.score}</p>
@@ -147,7 +148,7 @@ function questionPage(){
  <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[3]}">
  <label for="ansOpt">${store.questions[store.questionNumber].answers[3]}</label></br>
  <button class="enter-answer"><span class="button-label">Submit</span></button>
- </form></div>
+ </form></div></div>
 `
 }
 

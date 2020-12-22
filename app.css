@@ -18,12 +18,16 @@ h1{
   font-family: 'Rough Typewriter';
 }
 
-h2, h3, h4, p, .button-label{
+h2, h3, h4, p, .button-label {
   color: #112D32;
   font-family: 'Rough Typewriter';
 }
+p{
+  font-size: 20px;
+}
 img {
   border: 4px solid #254E58;
+  width: 100%;
 }
 button{
   border: 2px solid #112D32;
@@ -34,6 +38,11 @@ button:hover{
   background-color: #fff;
 }
 
+.container label{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #112D32;
+}
 .group {
   display: flex;
   flex-direction: column;
@@ -45,13 +54,14 @@ button:hover{
 }
 
 .container {
-  max-width: 500px;
+  width: 100%;
   border: 3px solid #254E58;
   padding: 10px;
+  word-wrap: break-all;
 }
 
 .noBorder{
-  width: 70%;
+  width: 95%;
   margin: auto;
 }
 
