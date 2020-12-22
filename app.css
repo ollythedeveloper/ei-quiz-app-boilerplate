@@ -25,9 +25,13 @@ h2, h3, h4, p, .button-label{
 img {
   border: 4px solid #254E58;
 }
-
+button{
+  border: 2px solid #112D32;
+  border-radius: 15px;
+}
 button:hover{
   cursor: pointer;
+  background-color: #fff;
 }
 
 .group {

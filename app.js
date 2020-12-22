@@ -262,7 +262,7 @@ function handleNextQuestion(){
   $('body').on('click', `.next-question`, event =>{
     event.preventDefault();
     store.questionNumber++;
-    generateQuestionPage();
+      generateQuestionPage();
   })
 }
 
