@@ -142,7 +142,7 @@ function questionPage(){
  <label for="ansOpt">${store.questions[store.questionNumber].answers[0]}</label></br>
  <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[1]}">
  <label for="ansOpt">${store.questions[store.questionNumber].answers[1]}</label></br>
- <input type="radio" name="option" value="${cstore.questions[store.questionNumber].answers[2]}">
+ <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[2]}">
  <label for="ansOpt">${store.questions[store.questionNumber].answers[2]}</label></br>
  <input type="radio" name="option" value="${store.questions[store.questionNumber].answers[3]}">
  <label for="ansOpt">${store.questions[store.questionNumber].answers[3]}</label></br>
@@ -195,30 +195,25 @@ function finalPage(){
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 //This function adds the startPage template to the DOM
 function renderStartPage(){
-  console.log('`renderStartPage` ran')
   $("main").append(startPage);
 }
 
 //This function clears the noBorder div(emptys the page for the next template)
 function clearPage(){
-  console.log('`clearPage` ran')
   $(".noBorder").empty();
 }
 
 function generateQuestionPage(){
   clearPage();
-  console.log('generating question')
   $('.noBorder').append(questionPage())
 }
 
 function renderCorrectAnswerPage(){
-  console.log('correct answer submitted')
   clearPage();
   $(".noBorder").append(correctAnswerPage())
 }
 
 function renderIncorrectAnswerPage(){
-  console.log('incorrect answer submitted')
   clearPage();
   $(".noBorder").append(incorrectAnswerPage())
 }
@@ -234,7 +229,6 @@ function renderFinalPage(){
 
 function handleStartQuiz(){
   $('.container').on('click', `.push-start`, event =>{
-    console.log('`handleStartQuiz` ran')
     clearPage();
     generateQuestionPage();
   })
@@ -243,10 +237,10 @@ function handleStartQuiz(){
 function checkAnswer(ansOpt){
   if (store.questions[store.questionNumber].correctAnswer === ansOpt){
     store.score++;
-    console.log('correct answer given')
+    console.log('correct')
     renderCorrectAnswerPage();
   }else{
-    console.log('incorrect answe given')
+    console.log('incorrect')
     renderIncorrectAnswerPage();
   }
   if (store.questionNumber<7){
@@ -257,11 +251,9 @@ function checkAnswer(ansOpt){
 }
 
 function handleSubmitAnswer(){
-  $('body').on('click', `.next-question`, event => {
+  $('body').on('click', `.enter-answer`, event => {
     event.preventDefault();
-    console.log('`hanldeSubmitAnswer` ran');
     let ansOpt= $("input:checked").val();
-    console.log('User chose: '+ansOpt)
     checkAnswer(ansOpt);
   })
 }
@@ -269,9 +261,7 @@ function handleSubmitAnswer(){
 function handleNextQuestion(){
   $('body').on('click', `.next-question`, event =>{
     event.preventDefault();
-    console.log('`handelNextQuestion` ran')
     store.questionNumber++;
-    console.log(store.questionNumber);
     generateQuestionPage();
   })
 }
