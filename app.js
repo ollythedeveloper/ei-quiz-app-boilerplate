@@ -120,7 +120,7 @@ const store = {
 
 var startPage = `
 <div class="noBorder">
-<img src="images/sense8.jpg">
+<img src="images/Sense8.jpg">
 <div class="container">
 <h2>See how well you know the characters from Sense8.<h2>
 <button class="push-start"><span class="button-label">Start Quiz</span>
