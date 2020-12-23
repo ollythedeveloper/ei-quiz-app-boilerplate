@@ -6,13 +6,19 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+/*Custom font*/
 @font-face{font-family: 'Rough Typewriter'; src:url(rough_typewriter.otf);}
+
+/* Body Format */
 body{
   background-color: #88BDBC;
   margin: auto;
   max-width: 700px;
   padding: 15px;
 }
+
+/* Format of text */
 h1{
   color: #fff;
   font-family: 'Rough Typewriter';
@@ -25,6 +31,8 @@ h2, h3, h4, p, .button-label {
 p{
   font-size: 20px;
 }
+
+/* format of elements imgs, buttons */
 img {
   border: 4px solid #254E58;
   width: 100%;
@@ -32,13 +40,17 @@ img {
 button{
   border: 2px solid #112D32;
   border-radius: 15px;
-  background-color: lightgray
+  background-color: lightgray;
+  padding: 3px;
+  margin: 8px 0 0 0;
 }
+
 button:hover{
   cursor: pointer;
   background-color: #fff;
 }
 
+/* format of divs */
 .container label{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
@@ -60,7 +72,7 @@ button:hover{
   padding: 10px;
   display: flex;
   flex-direction: column;
-  word-wrap:break-word;
+  word-wrap: break-word;
 }
 
 .noBorder{
@@ -72,17 +84,13 @@ button:hover{
   width:100%;
 }
 
-button {
-  padding: 3px;
-  margin: 8px 0 0 0;
-}
-
+/* formatting for desktop view */
 @media all and (min-width:800px){
   .container{
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .group{
     flex-direction: row;
     justify-content: space-between;
