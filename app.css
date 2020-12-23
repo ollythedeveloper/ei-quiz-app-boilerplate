@@ -58,7 +58,8 @@ button:hover{
   width: 100%;
   border: 3px solid #254E58;
   padding: 10px;
-  word-wrap: break-all;
+  display: flex;
+  word-wrap:break-word;
 }
 
 .noBorder{
