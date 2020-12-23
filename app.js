@@ -118,6 +118,7 @@ const store = {
 
 // These functions return HTML templates
 
+//This variable renders the start page 
 var startPage = `
 <div class="noBorder">
 <img src="images/Sense8.jpg">
@@ -127,6 +128,7 @@ var startPage = `
 </button></div></div>
 `
 
+//This function will render the question page
 function questionPage(){
   return  `
  <div class="noBorder">
@@ -152,6 +154,7 @@ function questionPage(){
 `
 }
 
+//This function will render the correct answer page
 function correctAnswerPage(){ 
   return `
    <div class="noBorder">
@@ -166,6 +169,7 @@ function correctAnswerPage(){
 `
 }
 
+//This function will render the incorrect answer page
 function incorrectAnswerPage(){ 
   return `
    <div class="noBorder">
@@ -181,6 +185,7 @@ function incorrectAnswerPage(){
 `
 }
 
+//This function will render the final/restart page
 function finalPage(){
   return `
   <div class="noBorder">
@@ -199,26 +204,30 @@ function renderStartPage(){
   $("main").append(startPage);
 }
 
-//This function clears the noBorder div(emptys the page for the next template)
+//This function clears the noBorder div(emptys the page for the next template
 function clearPage(){
   $(".noBorder").empty();
 }
 
+//This function clears the page then appends the question page
 function generateQuestionPage(){
   clearPage();
   $('.noBorder').append(questionPage())
 }
 
+//This function clears the page and appends the correct answer page
 function renderCorrectAnswerPage(){
   clearPage();
   $(".noBorder").append(correctAnswerPage())
 }
 
+//This function clears the page and appends the incorrect answer page
 function renderIncorrectAnswerPage(){
   clearPage();
   $(".noBorder").append(incorrectAnswerPage())
 }
 
+//This function clears the page and appends the final page
 function renderFinalPage(){
   clearPage();
   $(".noBorder").append(finalPage());
@@ -228,6 +237,7 @@ function renderFinalPage(){
 
 // These functions handle events (submit, click, etc)
 
+//This function generates the question page when the start button is clicked
 function handleStartQuiz(){
   $('.container').on('click', `.push-start`, event =>{
     clearPage();
@@ -235,6 +245,7 @@ function handleStartQuiz(){
   })
 }
 
+//This function checks if the submitted answer is correct and generates the appropriate page
 function checkAnswer(ansOpt){
   if (store.questions[store.questionNumber].correctAnswer === ansOpt){
     store.score++;
@@ -246,6 +257,7 @@ function checkAnswer(ansOpt){
   }
 }
 
+//This function responds to the user submitting their answer to a question
 function handleSubmitAnswer(){
   $('body').on('click', `.enter-answer`, event => {
     event.preventDefault();
@@ -254,6 +266,8 @@ function handleSubmitAnswer(){
   })
 }
 
+//This function generates the next question when the next button is clicked. 
+//If there are no more questions it generates the final page
 function handleNextQuestion(){
   $('body').on('click', `.next-question`, event =>{
     event.preventDefault();
@@ -266,6 +280,7 @@ function handleNextQuestion(){
   })
 }
 
+//This function restarts the quiz when the restart button is clicked
 function handleRestartQuiz(){
   $('body').on('click', `.reset-quiz`, event=>{
     store.questionNumber=0
@@ -273,6 +288,7 @@ function handleRestartQuiz(){
   })
 }
 
+//This funtion holds the event handler functions for the quiz
 function handleQuizApp(){
   renderStartPage();
   handleStartQuiz();

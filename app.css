@@ -59,6 +59,7 @@ button:hover{
   border: 3px solid #254E58;
   padding: 10px;
   display: flex;
+  flex-direction: column;
   word-wrap:break-word;
 }
 
@@ -77,6 +78,11 @@ button {
 }
 
 @media all and (min-width:800px){
+  .container{
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
   .group{
     flex-direction: row;
     justify-content: space-between;
