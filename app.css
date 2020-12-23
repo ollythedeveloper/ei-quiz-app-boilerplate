@@ -32,6 +32,7 @@ img {
 button{
   border: 2px solid #112D32;
   border-radius: 15px;
+  background-color: lightgray
 }
 button:hover{
   cursor: pointer;
