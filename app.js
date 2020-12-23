@@ -260,9 +260,14 @@ function checkAnswer(ansOpt){
 //This function responds to the user submitting their answer to a question
 function handleSubmitAnswer(){
   $('body').on('click', `.enter-answer`, event => {
-    event.preventDefault();
-    let ansOpt= $("input:checked").val();
-    checkAnswer(ansOpt);
+    if ($('input:radio').is (':checked')){
+      event.preventDefault();
+      let ansOpt= $("input:checked").val();
+      checkAnswer(ansOpt);
+    }else{
+      alert('Please select an answer!');
+      return false
+    }
   })
 }
 
