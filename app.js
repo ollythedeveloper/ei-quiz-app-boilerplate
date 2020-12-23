@@ -265,7 +265,7 @@ function handleSubmitAnswer(){
       let ansOpt= $("input:checked").val();
       checkAnswer(ansOpt);
     }else{
-      alert('Please select an answer!');
+      alert('Please select an answer choice.');
       return false
     }
   })
